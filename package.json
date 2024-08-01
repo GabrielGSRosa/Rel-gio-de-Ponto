@@ -1,0 +1,15 @@
+{
+    "name": "marcacao-ponto",
+    "version": "1.0.0",
+    "description": "Sistema de marcação de ponto",
+    "main": "api/server.js",
+    "scripts": {
+      "start": "node api/server.js"
+    },
+    "dependencies": {
+      "mongodb": "^4.5.0"
+    },
+    "author": "Gabriel Schoenfelder Rosa",
+    "license": "ISC"
+  }
+  

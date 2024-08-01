@@ -34,9 +34,22 @@ document.addEventListener('DOMContentLoaded', function(){
 
     function cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email){
 
-        let usuario = new NovoFuncionario(nome, sobrenome, dataNascimento, genero, email)
-        usuarios.push(usuario)
-        console.log(usuarios)
+            // Enviar os dados ao backend
+        fetch('https://relogio-de-ponto-kappa.vercel.app/api/server', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuario)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Lógica para lidar com a resposta do servidor
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     cadastroFormulario.addEventListener('submit', function(event){
