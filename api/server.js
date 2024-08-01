@@ -10,27 +10,31 @@ const client = new MongoClient(uri, {
   }
 });
 
-async function connectToMongo() {
-  try {
-    await client.connect();
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-  }
-}
-connectToMongo();
-
 module.exports = async (req, res) => {
+  // Adiciona cabeçalhos CORS
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Permite todas as origens, ajuste conforme necessário
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  
+  if (req.method === 'OPTIONS') {
+    // Responde a requisições preflight
+    res.writeHead(200);
+    res.end();
+    return;
+  }
+  
   if (req.method === 'POST') {
     try {
-      const database = client.db('banco-de-colaboradores'); 
-      const collection = database.collection('users'); 
+      await client.connect();
+      const database = client.db('banco-de-colaboradores');
+      const collection = database.collection('users');
       const result = await collection.insertOne(req.body);
       res.status(200).json(result);
     } catch (error) {
-      console.error(error);
+      console.error('Error inserting data:', error);
       res.status(500).json({ message: 'Error inserting data' });
+    } finally {
+      await client.close(); // Fechar a conexão após a operação
     }
   } else {
     res.status(405).end(); // Método não permitido

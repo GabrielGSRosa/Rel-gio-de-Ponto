@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function(){
     const containerPonto = document.getElementById("container-ponto");
     const cadastrarNovoUsuarioBtn = document.getElementById("cadastrarNovoUsuarioBtn");
     const btnVoltar = document.getElementById("voltar");
+    const marcarPontoBtn = document.getElementById('marcarPontoBtn');
+
 
     /* Lista com os usuários */
     const usuarios = [];

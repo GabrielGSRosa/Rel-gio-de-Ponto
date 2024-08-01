@@ -4,12 +4,12 @@
     "description": "Sistema de marcação de ponto",
     "main": "api/server.js",
     "scripts": {
-      "start": "node api/server.js"
+        "start": "node api/server.js"
     },
     "dependencies": {
-      "mongodb": "^4.5.0"
+        "cors": "^2.8.5",
+        "mongodb": "^4.5.0"
     },
     "author": "Gabriel Schoenfelder Rosa",
     "license": "ISC"
-  }
-  
+}
