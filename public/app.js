@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const email = document.getElementById('email').value;
 
         cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email)
+        console.log(usuarios)
 
         cadastroFormulario.reset()
     })
