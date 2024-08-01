@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     function cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email){
+        const usuario = new NovoFuncionario(nome, sobrenome, dataNascimento, genero, email);
+
 
             // Enviar os dados ao backend
         fetch('https://relogio-de-ponto-kappa.vercel.app/api/server', {
