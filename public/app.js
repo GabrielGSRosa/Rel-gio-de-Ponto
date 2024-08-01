@@ -1,3 +1,15 @@
+function mostrarFormulario() {
+    containerPonto.style.display = "none";
+    cadastroFormulario.style.display = "block";
+}
+
+function voltar() {
+    btnVoltar.style.display = "none";
+    cadastroFormulario.style.display = "none";
+    containerPonto.style.display = "block";
+    cadastrarNovoUsuarioBtn.style.display = "block";
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     /* Sistema de marcação de ponto */
 
@@ -11,11 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     /* Funções */
 
     /* Formulário de cadastro de colaborador */
-
-    function mostrarFormulario() {
-        containerPonto.style.display = "none";
-        cadastroFormulario.style.display = "block";
-    }
 
     async function cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email) {
         const usuario = {

@@ -38,6 +38,7 @@ app.post("/api/usuarios", async (req, res) => {
     }
 });
 
+
 app.listen(port, () => {
     console.log(`Backend started at http://localhost:${port}`);
 });
