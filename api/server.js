@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
   if (req.method === 'POST') {
     try {
       const database = client.db('banco-de-colaboradores'); 
-      const collection = database.collection('usuarios'); 
+      const collection = database.collection('users'); 
       const result = await collection.insertOne(req.body);
       res.status(200).json(result);
     } catch (error) {
