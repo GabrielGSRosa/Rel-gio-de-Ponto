@@ -43,6 +43,7 @@ h1 {
 
 .cadastroForm {
     display: none;
+    max-width: 90vw;
 }
 
 form {
