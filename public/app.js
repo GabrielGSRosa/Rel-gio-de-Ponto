@@ -1,62 +1,47 @@
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
     /* Sistema de marcação de ponto */
 
-    /* Atribuiçaõ de botões */
+    /* Atribuição de botões */
     const cadastroFormulario = document.getElementById("cadastroForm");
     const containerPonto = document.getElementById("container-ponto");
     const cadastrarNovoUsuarioBtn = document.getElementById("cadastrarNovoUsuarioBtn");
     const btnVoltar = document.getElementById("voltar");
-    const marcarPontoBtn = document.getElementById('marcarPontoBtn');
-
-
-    /* Lista com os usuários */
-    const usuarios = [];
-
-    /* Lista de horas marcadas */
-
-    /* Classes */
-    class NovoFuncionario{
-    constructor(nome, sobrenome, dataNascimento, genero, email){
-        this.nome = nome
-        this.sobrenome = sobrenome
-        this.dataNascimento = dataNascimento
-        this.genero = genero
-        this.email = email
-    }
-    }
+    const marcarPontoBtn = document.getElementById("marcarPontoBtn");
 
     /* Funções */
 
-    /* Formulario de cadastro de colaborador */
+    /* Formulário de cadastro de colaborador */
 
-    function mostrarFormulario(){
+    function mostrarFormulario() {
         containerPonto.style.display = "none";
         cadastroFormulario.style.display = "block";
     }
 
-    function cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email){
-        const usuario = new NovoFuncionario(nome, sobrenome, dataNascimento, genero, email);
+    async function cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email) {
+        const usuario = {
+            nome,
+            sobrenome,
+            dataNascimento,
+            genero,
+            email
+        };
 
-
-            // Enviar os dados ao backend
-        fetch('https://relogio-de-ponto-kappa.vercel.app/api/server', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(usuario)
-        })
-        .then(response => response.json())
-        .then(data => {
+        try {
+            const response = await fetch('https://relogio-de-ponto-kappa.vercel.app/api/usuarios', { // Atualize a URL para a URL de produção
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usuario)
+            });
+            const data = await response.json();
             console.log('Success:', data);
-            // Lógica para lidar com a resposta do servidor
-        })
-        .catch((error) => {
+        } catch (error) {
             console.error('Error:', error);
-        });
+        }
     }
 
-    cadastroFormulario.addEventListener('submit', function(event){
+    cadastroFormulario.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const nome = document.getElementById('nome').value;
@@ -65,11 +50,10 @@ document.addEventListener('DOMContentLoaded', function(){
         const genero = document.getElementById('genero').value;
         const email = document.getElementById('email').value;
 
-        cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email)
-        console.log(usuarios)
+        cadastrarUsuarios(nome, sobrenome, dataNascimento, genero, email);
 
-        cadastroFormulario.reset()
-    })
+        cadastroFormulario.reset();
+    });
 
     cadastrarNovoUsuarioBtn.addEventListener('click', function() {
         mostrarFormulario();
@@ -78,12 +62,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
     /* Marcação do ponto */
 
-    function mostrarVoltar(){
+    function mostrarVoltar() {
         btnVoltar.style.display = "block";
         cadastrarNovoUsuarioBtn.style.display = "none";
     }
 
-    function voltar(){
+    function voltar() {
         btnVoltar.style.display = "none";
         cadastroFormulario.style.display = "none";
         containerPonto.style.display = "block";
@@ -91,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     btnVoltar.addEventListener('click', function() {
-        voltar()
-    })
+        voltar();
+    });
 
     function updateTime() {
         const now = new Date();
@@ -105,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function(){
     marcarPontoBtn.addEventListener('click', function() {
         marcarPonto();
     });
-    
 
     function marcarPonto() {
         alert('Ponto marcado!');
@@ -113,7 +96,4 @@ document.addEventListener('DOMContentLoaded', function(){
 
     setInterval(updateTime, 1000);
     updateTime();
-
-
-})
-
+});
