@@ -1,0 +1,81 @@
+/* Estilo do botão de menu */
+.hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70px;
+    height: 50px;
+    gap: 5px;
+
+    /* Posição do botão */
+    position: absolute;
+    top: 20px; 
+    left: 20px; 
+    z-index: 1000;
+  }
+  
+  .hamburger-btn .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #eedddd;
+    transition: all 0.3s ease;
+    transform-origin: 5px 5px;
+  }
+  
+  /* Animação para abrir o botão hambúrguer */
+  .hamburger-btn .open:nth-child(1) {
+    transform: rotate(45deg) translate(1px, 3px);
+  }
+  
+  .hamburger-btn .open:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger-btn .open:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -5px);
+  }
+  
+  /* Estilo para o menu lateral */
+  .menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #0D6EFD;
+    color: rgb(253, 248, 248);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: left 0.3s ease;
+  }
+  
+  .menu-open {
+    left: 0;
+  }
+  
+  /* Estilo para os links do menu */
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu li {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .menu li a:hover {
+    text-decoration: underline;
+  }
+  

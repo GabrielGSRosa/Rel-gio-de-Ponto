@@ -1,0 +1,50 @@
+/* RegisterUsuario.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Garantir que fica acima de tudo */
+  }
+  
+  .modal-content {
+    background-color: #1d1d1d;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    z-index: 1000;
+    position: relative;
+  }
+
+  .cadastroForm .form-group {
+    margin-bottom: 15px;
+    align-items: center;
+  }
+
+  .cadastroForm input,
+  .cadastroForm select,
+  .cadastroForm button {
+    width: 30%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .cadastroForm button {
+    background-color: #0b66ee;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .cadastroForm button:hover {
+    background-color: #0655cc;
+  }
+  
