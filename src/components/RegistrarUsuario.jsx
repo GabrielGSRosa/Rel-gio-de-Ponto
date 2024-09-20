@@ -5,7 +5,7 @@ function RegistrarUsuario({ isOpen, closeForm }) {
   return (
     <>
       {isOpen && (
-        <div className="modal-overlay" onClick={closeForm}>
+        <div className="modal-overlay" onClick={closeForm} style="color: white">
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <form id="cadastroForm" className="cadastroForm" action="/api/register" method="POST">
               <div className="form-group">

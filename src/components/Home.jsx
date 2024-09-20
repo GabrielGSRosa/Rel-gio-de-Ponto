@@ -40,9 +40,9 @@ function Home() {
   return (
     <div>
         <div className='relogio'>
-            <h1>Relógio de Ponto</h1>
-            <h2>{day}/{month}/{year}</h2>
-            <h2>{time.hours}:{time.minutes}:{time.seconds}</h2>
+            <h1 style="color: white">Relógio de Ponto</h1>
+            <h2 style="color: white">{day}/{month}/{year}</h2>
+            <h2 style="color: white">{time.hours}:{time.minutes}:{time.seconds}</h2>
             <button onClick={marcarPonto} className="btn btn-outline-primary">Marcar ponto</button>
         </div>
 
