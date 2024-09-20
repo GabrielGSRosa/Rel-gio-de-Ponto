@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+* {
+  color: white;
+}
+
 body {
   background-color: #1d1d1d;
+}
+
+h1, label{
+  color: white;
 }
