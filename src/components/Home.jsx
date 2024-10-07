@@ -4,9 +4,9 @@ import axios from 'axios';
 
 function Home() {
   const [time, setTime] = useState({
-    hours: "",
-    minutes: "",
-    seconds: "",
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
   });
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
