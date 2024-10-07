@@ -8,7 +8,7 @@ function Home() {
     minutes: "00",
     seconds: "00",
   });
-  
+
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -19,7 +19,7 @@ function Home() {
 
   const fetchTimeForBrasilia = async () => {
     try {
-      const response = await axios.get("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+      const response = await axios.get("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
       const dateTime = new Date(response.data.datetime); // Obtém a hora de Brasília da API
       const hours = String(dateTime.getHours()).padStart(2, '0');
       const minutes = String(dateTime.getMinutes()).padStart(2, '0');
