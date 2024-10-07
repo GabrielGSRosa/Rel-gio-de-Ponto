@@ -8,6 +8,7 @@ function Home() {
     minutes: "00",
     seconds: "00",
   });
+  
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
