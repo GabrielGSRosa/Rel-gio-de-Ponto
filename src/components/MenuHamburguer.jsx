@@ -27,7 +27,7 @@ function MenuHamburguer() {
        {/* Menu lateral */}
       <div className={`menu ${isOpen ? 'menu-open' : ''}`}>
         <ul>
-          <li><a onClick={registerMenu}>Cadastrar novo usuário</a></li>
+          <li><a onClick={registerMenu}>Cadastrar novo colaborador</a></li>
           <li><a href="https://github.com/GabrielGSRosa/Rel-gio-de-Ponto/tree/main">Sobre</a></li>
         </ul>
       </div>

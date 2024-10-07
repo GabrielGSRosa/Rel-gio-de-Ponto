@@ -4,9 +4,9 @@ import axios from 'axios';
 
 function Home() {
   const [time, setTime] = useState({
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
+    hours: "",
+    minutes: "",
+    seconds: "",
   });
   const [locationAllowed, setLocationAllowed] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -26,6 +26,7 @@ function Home() {
       setTime({ hours, minutes, seconds });
     } catch (error) {
       console.log('Erro ao buscar a hora de Brasília:', error);
+      console.log('Tenta verificar o horário do seu dispositivo, verifique se está correto.')
     }
   };
 
