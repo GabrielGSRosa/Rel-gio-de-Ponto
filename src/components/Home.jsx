@@ -1,59 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Home.module.css'; // Está estilizando os textos
-import axios from 'axios';
 
 function Home() {
-  const [time, setTime] = useState({
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-  });
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
-  const [locationAllowed, setLocationAllowed] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(null);
-
-  const today = new Date();
-  const day = today.getDate();   
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const year = today.getFullYear();
-
-  const fetchTimeForBrasilia = async () => {
-    try {
-      const response = await axios.get("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-      const dateTime = new Date(response.data.datetime); // Obtém a hora de Brasília da API
-      const hours = String(dateTime.getHours()).padStart(2, '0');
-      const minutes = String(dateTime.getMinutes()).padStart(2, '0');
-      const seconds = String(dateTime.getSeconds()).padStart(2, '0');
-      setTime({ hours, minutes, seconds });
-    } catch (error) {
-      console.log('Erro ao buscar a hora de Brasília:', error);
-      console.log('Tenta verificar o horário do seu dispositivo, verifique se está correto.')
+  // Função para verificar o tamanho da tela
+  const checkDeviceType = () => {
+    const width = window.innerWidth;
+    if (width <= 1075) { 
+      setIsMobileOrTablet(true);
+    } else {
+      setIsMobileOrTablet(false);
     }
-  };
-
-  const handleLocationSuccess = () => {
-    setLocationAllowed(true);
-    fetchTimeForBrasilia(); // Usa o horário de Brasília
-  };
-
-  const handleLocationError = () => {
-    setErrorMsg('Não foi possível acessar sua localização. Usando Brasília como padrão.');
-    setLocationAllowed(false);
-    fetchTimeForBrasilia(); // Usa o horário de Brasília como fallback
   };
 
   useEffect(() => {
-    // Solicita a localização do usuário
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError);
-    } else {
-      setErrorMsg('Geolocalização não é suportada pelo seu navegador. Usando Brasília como padrão.');
-      fetchTimeForBrasilia(); // Usa Brasília como fallback
-    }
+    checkDeviceType(); 
+    window.addEventListener('resize', checkDeviceType); 
+    
+    return () => window.removeEventListener('resize', checkDeviceType);
+  }, []);
 
-    const intervalId = setInterval(fetchTimeForBrasilia, 1000); // Atualiza o horário a cada segundo
+  const handleDownloadClick = () => {
+    window.location.href = 'https://drive.google.com/uc?export=download&id=1F1WReQXi83RI9hQQH7XPyVPvfDXrMTY1'; 
+  };
 
-    return () => clearInterval(intervalId);
+  const [time, setTime] = useState({
+    hours: new Date().getHours(),
+    minutes: new Date().getMinutes(),
+    seconds: new Date().getSeconds(),
+    day: new Date().getDate(),
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
+  });
+
+  const [locationAllowed, setLocationAllowed] = useState(true); // Simulação da permissão de localização
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date(); // Atualiza o objeto Date a cada segundo
+      setTime({
+        hours: now.getHours(),
+        minutes: now.getMinutes(),
+        seconds: now.getSeconds(),
+        day: now.getDate(),
+        month: now.getMonth() + 1,
+        year: now.getFullYear(),
+      });
+    }, 1000); // Atualiza a cada segundo
+
+    return () => clearInterval(interval); // Limpa o intervalo ao desmontar
   }, []);
 
   const marcarPonto = () => {
@@ -66,15 +61,25 @@ function Home() {
 
   return (
     <div>
-      <div className='relogio'>
-        <h1 style={{color: 'white'}}>Relógio de Ponto</h1>
-        <h2 style={{color: 'white'}}>{day}/{month}/{year}</h2>
-        <h2 style={{color: 'white'}}>{time.hours}:{time.minutes}:{time.seconds}</h2>
-        {errorMsg && <p style={{color: 'red'}}>{errorMsg}</p>}
-        <button onClick={marcarPonto} className="btn btn-outline-primary" disabled={!locationAllowed}>
+      <div className="relogio">
+        <h1 style={{ color: 'white' }}>Relógio de Ponto</h1>
+        <h2 style={{ color: 'white' }}>
+          {time.day}/{time.month}/{time.year}
+        </h2>
+        <h2 style={{ color: 'white' }}>
+          {String(time.hours).padStart(2, '0')}:{String(time.minutes).padStart(2, '0')}:
+          {String(time.seconds).padStart(2, '0')}
+        </h2>
+        {/* Caso haja um erro, ele será exibido aqui */}
+        <button onClick={marcarPonto} className="btn btn-outline-primary">
           Marcar ponto
         </button>
       </div>
+      {isMobileOrTablet && (
+        <button onClick={handleDownloadClick} className="btn btnDownload btn-primary">
+          Baixe nosso Aplicativo
+        </button>
+      )}
     </div>
   );
 }
